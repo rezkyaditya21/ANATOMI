@@ -688,17 +688,24 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
   box-shadow: 0 0 15px rgba(2, 132, 199, 0.5) !important;
 }
 
-/* --- Precision Scientific Layers Panel Overrides --- */
-.layers-panel {
-  left: 24px !important;
-  top: 135px !important;
-  bottom: 165px !important;
-  width: 295px !important;
-  padding: 16px 14px 10px !important;
-  border-radius: 14px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  z-index: 10 !important;
+/* --- Precision Scientific Layers Panel Overrides (Desktop) --- */
+@media (min-width: 769px) {
+  .layers-panel {
+    left: 24px !important;
+    top: 135px !important;
+    bottom: 165px !important;
+    width: 295px !important;
+    padding: 16px 14px 10px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 10 !important;
+  }
+  .ecg-vitals-hud {
+    left: 24px !important;
+    bottom: 24px !important;
+    width: 295px !important;
+  }
 }
 
 .panel-heading {
@@ -805,6 +812,233 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
 .panel-foot button:hover {
   background: rgba(56, 189, 248, 0.12) !important;
   color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Comprehensive Mobile & Tablet Responsive Layout (< 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Header (Top Left) */
+  .identity {
+    left: 12px !important;
+    top: max(10px, env(safe-area-inset-top)) !important;
+    z-index: 25 !important;
+    pointer-events: none !important;
+  }
+  .identity h1 {
+    font-size: 20px !important;
+    margin: 2px 0 !important;
+    gap: 6px !important;
+  }
+  .identity .edition {
+    font-size: 8px !important;
+    padding: 1px 4px !important;
+  }
+  .identity .eyebrow {
+    font-size: 8px !important;
+    letter-spacing: 0.1em !important;
+    gap: 4px !important;
+  }
+  .identity-meta {
+    display: none !important;
+  }
+
+  /* 2. Top Actions Bar (Top Right) */
+  .top-actions {
+    top: max(8px, env(safe-area-inset-top)) !important;
+    right: 8px !important;
+    gap: 4px !important;
+    z-index: 25 !important;
+  }
+  .top-actions button,
+  .top-actions .icon-button {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    justify-content: center !important;
+  }
+  .top-actions button span,
+  .top-actions button kbd {
+    display: none !important;
+  }
+
+  /* 3. Layers Drawer Panel (Hidden by default, slides up when open) */
+  .layers-panel {
+    display: none !important;
+  }
+  .layers-panel.mobile-open {
+    display: flex !important;
+    position: fixed !important;
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    top: auto !important;
+    width: auto !important;
+    max-height: 65vh !important;
+    border-radius: 18px !important;
+    z-index: 60 !important;
+    padding: 14px 14px 10px !important;
+    background: rgba(10, 16, 26, 0.97) !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.2) !important;
+  }
+  .panel-heading .mobile-only {
+    display: flex !important;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* 4. Height Caliper (Hide on mobile to free up viewport) */
+  .height-caliper {
+    display: none !important;
+  }
+
+  /* 5. View Angle Controls (Right side) */
+  .view-controls {
+    right: 6px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    padding: 3px !important;
+    gap: 2px !important;
+    border-radius: 10px !important;
+    z-index: 20 !important;
+  }
+  .view-controls button {
+    width: 30px !important;
+    height: 32px !important;
+    font-size: 11px !important;
+  }
+  .view-controls i {
+    margin: 3px 2px !important;
+  }
+
+  /* 6. Live ECG Vitals HUD (Placed just above bottom dock) */
+  .ecg-vitals-hud {
+    position: absolute !important;
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(104px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 4px 8px !important;
+    border-radius: 10px !important;
+    z-index: 15 !important;
+    background: rgba(10, 16, 26, 0.85) !important;
+  }
+  .ecg-canvas {
+    height: 20px !important;
+  }
+  .ecg-header {
+    font-size: 11px !important;
+    margin-bottom: 1px !important;
+  }
+  .ecg-stats-row {
+    font-size: 8.5px !important;
+    padding-top: 2px !important;
+  }
+
+  /* 7. Bottom Dock (Diseksi Bertahap & Explode Slider) */
+  .bottom-dock {
+    position: absolute !important;
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    padding: 8px 10px !important;
+    border-radius: 14px !important;
+    gap: 8px !important;
+    z-index: 20 !important;
+    background: rgba(10, 16, 26, 0.92) !important;
+  }
+  .dock-layers {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    min-width: 44px !important;
+    padding: 0 6px 0 0 !important;
+    border-right: 1px solid rgba(56, 189, 248, 0.2) !important;
+    color: #38bdf8 !important;
+  }
+  .dock-layers span {
+    font-size: 9px !important;
+    font-weight: 600 !important;
+  }
+  .explode-control {
+    margin-right: 6px !important;
+  }
+  .explode-label {
+    font-size: 11px !important;
+    margin-bottom: 3px !important;
+  }
+  .explode-label output {
+    font-size: 11px !important;
+    padding: 1px 4px !important;
+    min-width: 32px !important;
+  }
+  .slider-endpoints {
+    font-size: 8px !important;
+    margin-top: 2px !important;
+  }
+  .dock-reset {
+    padding-left: 6px !important;
+    font-size: 8px !important;
+  }
+
+  /* 8. Scene Caption */
+  .scene-caption {
+    bottom: calc(154px + env(safe-area-inset-bottom)) !important;
+    font-size: 8px !important;
+    letter-spacing: 0.06em !important;
+    white-space: normal !important;
+    text-align: center !important;
+    max-width: calc(100% - 24px) !important;
+  }
+  .caption-line {
+    width: 14px !important;
+  }
+
+  /* 9. Detail Dossier Sheet (Organ info when tapped) */
+  .detail-sheet {
+    position: fixed !important;
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 54vh !important;
+    border-radius: 18px !important;
+    padding: 16px 14px !important;
+    z-index: 70 !important;
+    background: rgba(10, 16, 26, 0.98) !important;
+    box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.85) !important;
+  }
+  .structure-title {
+    font-size: 20px !important;
+  }
+
+  /* 10. CT Slicer & Search Panels */
+  .ct-slice-panel,
+  .search-panel {
+    position: fixed !important;
+    left: 8px !important;
+    right: 8px !important;
+    top: 50px !important;
+    width: auto !important;
+    z-index: 55 !important;
+  }
+
+  /* 11. Footer */
+  .studio-footer {
+    display: none !important;
+  }
 }
 
 
