@@ -366,7 +366,10 @@ if (isXray > 0.5) {
     const loadChunk = async (ci: number) => {
       const chunk = atlas.chunks[ci];
       const compressed = !!chunk.gzip && typeof DecompressionStream !== 'undefined';
-      const response = await fetch(compressed ? chunk.gzip! : chunk.url, { signal: abort.signal });
+      const base = import.meta.env.BASE_URL || './';
+      const rawTarget = compressed ? chunk.gzip! : chunk.url;
+      const targetUrl = rawTarget.startsWith('/') ? (base.endsWith('/') ? `${base}${rawTarget.slice(1)}` : `${base}/${rawTarget.slice(1)}`) : rawTarget;
+      const response = await fetch(targetUrl, { signal: abort.signal });
       const buffer = await decodeModelResponse(response, chunk.bytes, compressed);
       if (disposed) return;
       const groups = new Map<string, T.BufferGeometry[]>();

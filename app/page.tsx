@@ -193,8 +193,9 @@ export default function Home() {
     setAtlas(null);
     setChosen(null);
     setDetails(false);
-    setState({ ...initial });
-    fetch('/models/atlas.json', { signal: abort.signal })
+    const base = import.meta.env.BASE_URL || './';
+    const atlasUrl = base.endsWith('/') ? `${base}models/atlas.json` : `${base}/models/atlas.json`;
+    fetch(atlasUrl, { signal: abort.signal })
       .then(r => {
         if (!r.ok) throw new Error('Katalog anatomi tidak dapat dimuat.');
         return r.json();
